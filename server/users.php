@@ -1,35 +1,36 @@
 <?php
-include ("../db/users_db.php");
+include ("../db/user_db.php");
+include ("../db/picture_db.php");
 
-class Users{
-	private $users_db;
+class User{
+	
+	private $userDB;
+	private $picDB;
 	
 	function __construct(){
-		$this->users_db = new Users_db();
-		//just to show you what it does when it starts echo "Start This";
-		
+		$userDB = new User_db();
+		$picDB = new Picture_db();
 	}
 	
+	function get_user_info($id){
+		$this->userDB->set_user_id($id);
+		$this->picDB->set_user_id($id);
+		
+		$userDB= $this->userDB->get_user_by_id();
+		$picDB = $this->picDB->get_pictures_by_user_id();
+		
+		$user["pics"] = $pics;
+		
+		return $user;
+	}
 	
-	function get_all_users(){
-		return $this->users_db->get_users();
+	function get_user_id($username, $password) {
+		$this->userDB->set_user_name($username);
+		$this->userDB->set_pasword($password);
+		$id = $this->userDB->get_user_id_by_name_pass();
 		
-		
+		return $id;
+		}
 }
-
-     function get_user_by_id($id){
-		 $this->users_db->set_user_id($id);
-		 return $this->users_db->get_user_by_id();
-	 }
-
-}
-
-/*$users = new Users();
-$var = $users->get_all_users();
-$var2 = $users->get_user_by_id(1);
-
-var_dump($var);
-var_dump($var2);
-*?
 
 ?>
