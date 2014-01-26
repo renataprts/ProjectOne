@@ -1,18 +1,12 @@
 <?php
-include ("users.php");
-
-if(isset($_GET['allusers'])){
-	$users = new Users();
-	echo json_encode($users->get_all_users());
-	
-}
-
-if(isset($_GET['user'])){
-	if(isset($_GET['id'])){
-		$users = new Users();
-	    echo json_encode($users->get_user_by_id($_GET['id']));
+include ("user.php");
+if (isset($_GET['user'])){
+	if(isset($_GET['username']) && isset($_GET['password'])){
+		$userClass = new User();
+		$user_id = $userClass->get_userid($_GET['user_name'], $_GET['password']);
+		$user_info = $userClass->get_user_info($user_id);
+		echo json_encode($user_info);
 	}
 }
-
 
 ?>
