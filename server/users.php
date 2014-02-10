@@ -1,36 +1,56 @@
 <?php
-include ("../db/user_db.php");
-include ("../db/picture_db.php");
+include ("../db/users_db.php");
+include ("../db/portfolios_db.php");
 
-class User{
-	
-	private $userDB;
-	private $picDB;
+
+class Users{
+	private $usersDB;
+	private $portfoliosDB;
 	
 	function __construct(){
-		$userDB = new User_db();
-		$picDB = new Picture_db();
-	}
-	
-	function get_user_info($id){
-		$this->userDB->set_user_id($id);
-		$this->picDB->set_user_id($id);
-		
-		$userDB= $this->userDB->get_user_by_id();
-		$picDB = $this->picDB->get_pictures_by_user_id();
-		
-		$user["pics"] = $pics;
-		
-		return $user;
-	}
-	
-	function get_user_id($username, $password) {
-		$this->userDB->set_user_name($username);
-		$this->userDB->set_pasword($password);
-		$id = $this->userDB->get_user_id_by_name_pass();
-		
-		return $id;
+		$this->usersDB = new Users_db();
+		$this->portfoliosDB = new Portfolios_db();
+			
 		}
+		
+	function get_user_info($id){
+		$this->usersDB->set_user_id($id);
+		$this->portfoliosDB->set_user_id($id);
+			
+		$users = $this->usersDB->get_user_by_id();
+		$portfolios = $this->portfoliosDB->get_portfolios_by_user_id();
+			
+		$users["portfolios"] = $portfolios;
+			
+		return $users;
+		
+	}
+	
+	
+	function insert_user($username, $password){
+		$this->usersDB->set_username($username);
+		$password = md5($password);
+		$this->usersDB->set_password($password);
+		$id = $this->usersDB->insert_users();
+		
+		if(is_numeric($id)){
+			return $id;
+		}
+	}
+	
+	function login($username, $password){
+		
+	}
+	
+	
+	
 }
 
+/*
+$users = new Users();
+$userinf = $users->get_user_info(2);
+echo "<pre>";
+var_dump($userinf["portfolios"]);
+echo "</pre>";
+*/
 ?>

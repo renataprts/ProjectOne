@@ -2,68 +2,91 @@
 include("connect.php");
 
 class Users_db {
+	private $c_con;
+	private $users_id;
+	private $username;
+	private $password;
 	
-	private $user_id;
 	
-	function set_user_id($id){
-		$this->user_id = $id;
-	}
 	
-	function get_user_id($id){
-		return $this->user_id;
-	}
-	
-	function get_users(){
+	function __construct(){
 		global $con;
-		$query = "SELECT * FROM users";
-		$result = mysqli_query($con, $query);
+		$this->c_con = $con;
 		
-		$users = array();
-		$users_data = array();
-		while ($row = mysqli_fetch_array($result)){
-			$users_data['username'] = $row['username'];
-			$users_data['description'] = $row['description'];
-			$users_data['avatar'] = $row['avatar'];
-			$users[$row['id']] = $users_data;
-}
-
-    //var_dump($users); //HERE FOR TESTING PURPOSES
-    return $users;
+	}
+	
+	function get_all_users(){
+	global $con;
+	$query = "SELECT * FROM users";
+    $result = mysqli_query($this->c_con, $query);
+	
+	$arr = array();
+	 while ($row = mysqli_fetch_array($result)){
+	     $arr[$row['id']] = $row;  
+    }
+    return $arr;
 		
 	}
 	
 	function get_user_by_id(){
-		global $con;
-		
-		//"$this->" is to call the variable outside of the function
-		$query = "SELECT * FROM users WHERE id = ".$this->user_id;
-		$result = mysqli_query($con, $query);
-		
-		
-		$users_data = array();
-		while ($row = mysqli_fetch_array($result)){
-			$users_data['username'] = $row['username'];
-			$users_data['description'] = $row['description'];
-			$users_data['avatar'] = $row['avatar'];
-			
+	$query = "SELECT * FROM users WHERE id=".$this->users_id;
+    $result = mysqli_query($this->c_con, $query);
+	
+	$arr = array();
+	 while ($row = mysqli_fetch_array($result)){
+	$arr[$row['id']] = $row;  
 }
-
-    //var_dump($users); //HERE FOR TESTING PURPOSES
-    return $users_data;
+    return $arr;
 		
 	}
+	
+	function set_user_id($id){
+		$this->users_id = $id;
+	}
+	
+	
+
+	
+	function set_username($name){
+			$this->username = $name;
+			
+		}
+		
+	function set_password($password){
+			
+			$this->password = $password;
+		}
+		
+	function insert_users(){
+	$query = "INSERT INTO users (username, password) VALUES ($this->username, $this->password)";
+	$result = mysqli_query($this->c_con, $query);
+	
+	if ($result) {
+		echo "Successfully...";
+		return mysqli_insert_id();
 
 }
-
-/*$mydb = new User_db();
-$allusers = $mydb->get_users();
-
-foreach($allusers as $id => $user_arr){
+			
+		}
 	
-	$mydb->set_user_id($id);
-    $mydb->get_user_by_id();
-}*/
+}
+
+/*
+$users = new Users_db();
+$allusers = $users->get_all_users();
+
+echo "<pre>";
+var_dump($allusers);
+echo "</pre>";
 
 
+$users = new Users_db();
+$users->set_user_id(2);
+$theUser = $users->get_user_by_id();
+
+echo "<pre>";
+var_dump($theUser);
+echo "</pre>";
+*/
 
 ?>
