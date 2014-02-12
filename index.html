@@ -19,7 +19,7 @@ $(document).ready(function(e){
   
   var username = $("#username").val();
   var password = $("#password").val();
-  $.post("server/users_client.php", {username:username, password:password}, function(data){
+  $.post("server/users_client.php", {username:username, password:"abc"}, function(data){
 	  
  });
 
