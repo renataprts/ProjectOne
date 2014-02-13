@@ -58,12 +58,13 @@ class Users_db {
 		}
 		
 	function insert_users(){
-	$query = "INSERT INTO users (username, password) VALUES ($this->username, $this->password)";
+	$query = "INSERT INTO users (username, password) VALUES ('$this->username', '$this->password')";
+	echo $query;
 	$result = mysqli_query($this->c_con, $query);
 	
 	if ($result) {
 		echo "Successfully...";
-		return mysqli_insert_id();
+		return mysqli_insert_id($this->c_con);
 
 }
 			

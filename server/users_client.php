@@ -11,10 +11,9 @@ if(isset($_GET['users'])){
 	}
 }
 
-if(isset($POST['username']) && isset($POST['password'])){
+if(isset($_POST['username']) && isset($_POST['password'])){
 	$users = new Users();
-	$users->insert_user($POST['username'], $POST['password']);
-	
+	$users->insert_user($_POST['username'], $_POST['password']);
 	
 }
 

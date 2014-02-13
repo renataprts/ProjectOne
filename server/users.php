@@ -32,7 +32,6 @@ class Users{
 		$password = md5($password);
 		$this->usersDB->set_password($password);
 		$id = $this->usersDB->insert_users();
-		
 		if(is_numeric($id)){
 			return $id;
 		}

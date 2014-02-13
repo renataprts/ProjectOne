@@ -10,6 +10,12 @@
 <script>
 $(document).ready(function(e){
 	$("#reg_but").click(function(e){
+		
+		var username = $("#username").val();
+  var password = $("#password").val();
+  $.post("server/users_client.php", {username:username, password:password}, function(data){
+	  console.log(data);
+ });
        $.get("server/users_client.php", {users:true , users_id:true}, function(data){
 	         var j_data = $.parseJSON(data);
 	         console.log(j_data);
@@ -17,11 +23,7 @@ $(document).ready(function(e){
        });
   });
   
-  var username = $("#username").val();
-  var password = $("#password").val();
-  $.post("server/users_client.php", {username:username, password:"abc"}, function(data){
-	  
- });
+  
 
 });
 </script>
