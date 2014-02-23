@@ -24,6 +24,18 @@ $(document).ready(function(e){
   });
   
   
+  
+  $("#con_but").click(function(e){
+		
+  var username = $("#username").val();
+
+       $.get("server/users_client.php", {users:true , users_id:true}, function(data){
+	         var j_data = $.parseJSON(data);
+	         console.log(j_data);
+
+       });
+  });
+  
 
 });
 </script>
@@ -33,6 +45,11 @@ $(document).ready(function(e){
 
 <input type='text' id='username' />
 <input type='text' id='password' />
+
+<input type='text' id='username' /> <br />
+<input type='button' value='Confirm' id='conf_but'/>
+
+
 
 </body>
 </html>

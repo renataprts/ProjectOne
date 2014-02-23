@@ -40,6 +40,30 @@ class Users_db {
 		
 	}
 	
+	function get_user_by_username(){
+	$query = "SELECT * FROM users WHERE username=".$this->username;
+    $result = mysqli_query($this->c_con, $query);
+	
+	$arr = array();
+	 while ($row = mysqli_fetch_array($result)){
+	$arr[$row['id']] = $row;  
+}
+    return $arr;
+		
+	}
+	
+	function get_user_by_password(){
+	$query = "SELECT * FROM users WHERE password=".$this->password;
+    $result = mysqli_query($this->c_con, $query);
+	
+	$arr = array();
+	 while ($row = mysqli_fetch_array($result)){
+	$arr[$row['id']] = $row;  
+}
+    return $arr;
+		
+	}
+	
 	function set_user_id($id){
 		$this->users_id = $id;
 	}

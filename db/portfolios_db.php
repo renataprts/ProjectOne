@@ -5,7 +5,10 @@ class Portfolios_db {
 	private $c_con;
 	private $portfolios_id;
 	private $users_id;
-	
+	private $splashlink;
+	private $title;
+	private $description;
+	private $portfolios;
 	
 	
 	function __construct(){
@@ -66,6 +69,31 @@ class Portfolios_db {
 		
 	}
 	
+	function set_splashlink($splash){
+			$this->splashlink = $splash;
+			
+	}
+		
+	function set_title($title){
+			$this->title = $title;
+		}
+		
+	function set_description($description){
+			$this->description = $description;
+		}
+	
+	function insert_portfolios(){
+	$query = "INSERT INTO portfolios (splashlink, title, description) VALUES ('$this->splashlink', '$this->title', '$this->description')";
+	echo $query;
+	$result = mysqli_query($this->c_con, $query);
+	
+	if ($result) {
+		echo "Successfully...";
+		return mysqli_insert_id($this->c_con);
+
+}
+	
+}
 }
 	
 /*

@@ -18,4 +18,30 @@ if(isset($_POST['username']) && isset($_POST['password'])){
 }
 
 
+if(isset($_GET['username'])){
+	$usersClass = new Users();
+	$users_info = $usersClass->get_user_username($_GET['username']);
+	var_dump($users_info);
+	if($_GET['username'] == $users_info['username']){
+		echo "I GOT THE SAME VALUE!";	
+	} else {
+		echo "I GOT WRONG VALUES!";	
+	}
+	
+}
+
+if(isset($_GET['password'])){
+	$usersClass = new Users();
+	$users_info = $usersClass->get_user_password($_GET['password']);
+	var_dump($users_info);
+	if($_GET['password'] == $users_info['password']){
+		echo "I GOT THE SAME PASSWORD VALUE!";	
+	} else {
+		echo "I GOT WRONG PASSWORD VALUES!";	
+	}
+	
+}
+
+
+
 ?>

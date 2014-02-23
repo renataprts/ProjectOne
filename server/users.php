@@ -42,6 +42,30 @@ class Users{
 	}
 	
 	
+	function get_user_username($username){
+		$this->usersDB->set_username($username);
+			
+		$users = $this->usersDB->get_user_by_username();
+			
+		$users["username"] = $username;
+			
+		return $users;
+		
+	}
+	
+	
+	function get_user_password($password){
+		$this->usersDB->set_password($password);
+			
+		$users = $this->usersDB->get_user_by_password();
+			
+		$users["password"] = $password;
+			
+		return $users;
+		
+	}
+	
+	
 	
 }
 
