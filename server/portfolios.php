@@ -32,6 +32,7 @@ class Portfolios{
 		$this->portfoliosDB->set_title($title);
 		$this->portfoliosDB->set_description($description);
 		$id = $this->portfoliosDB->insert_portfolios();
+		return $id;
 		
 	}
 	

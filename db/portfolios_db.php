@@ -84,11 +84,11 @@ class Portfolios_db {
 	
 	function insert_portfolios(){
 	$query = "INSERT INTO portfolios (splashlink, title, description) VALUES ('$this->splashlink', '$this->title', '$this->description')";
-	echo $query;
+	//echo $query;
 	$result = mysqli_query($this->c_con, $query);
 	
 	if ($result) {
-		echo "Successfully...";
+		//echo "Successfully...";
 		return mysqli_insert_id($this->c_con);
 
 }
